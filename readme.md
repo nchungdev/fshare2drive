@@ -1,8 +1,8 @@
-# Fshare Tool - Download, save and upload to Google Drive, OneDrive using Fshare API.
+# Fshare2Drive - Download, save and upload to Google Drive, OneDrive using Fshare API.
 
 ## Introduction
 
-Fshare Tool is a tool to transfer Fshare file to Google Drive, OneDrive using Fshare API.
+Fshare2Drive is a tool to transfer Fshare file to Google Drive, OneDrive using Fshare API.
 
 ## Requirements
 - You need to have a VIP Fshare with daily bandwith available account to use this tool (to can download file with high speed).
@@ -24,24 +24,17 @@ Fshare Tool is a tool to transfer Fshare file to Google Drive, OneDrive using Fs
 
 - If you want to upload to OneDrive, install `rclone`, you can follow home page of [rclone](https://rclone.org/) to install. Make sure you can run `rclone` command in terminal. After install, you need to config `rclone` to use OneDrive, you can follow [this guide](https://rclone.org/onedrive/).
 
-- Clone this repo and install dependencies
+- How to use:
 
     ```bash
     git clone https://github.com/nchungdev/fshare2drive
     cd fshare_tool
-    pip3 install -r requirements.txt
-    ```
-
-- Make a copy of `config.ini.example` to `config.ini` and edit it.
-
-    ```bash
     cp config.ini.example config.ini
-    vim config.ini
+    pip3 install -r requirements.txt
+    python3 init_settings.py
+    python3 login_fshare.py
     ```
-> You must config `mail`, `password` of your Fshare Account, and `app_agent`, `app_key` your received from Fshare via mail.
-> Morever, you want config `Drive` block to can use upload function: If use Google Drive, set `gdrive` to `1` and config `folder_id`. If use OneDrive, set `onedrive` to `1`, config `rclone_remote_name` and `onedrive_folder_path`.
-
-- Short cmd for colab
+- Or short cmd for colab
     ```bash
     !git clone https://github.com/nchungdev/fshare2drive
     !cd fshare_tool
@@ -49,8 +42,8 @@ Fshare Tool is a tool to transfer Fshare file to Google Drive, OneDrive using Fs
     !rm -r fshare_tool
     !mv config.ini.example config.ini
     !pip3 install -r requirements.txt
-    !python init_settings.py
-    !python login_fshare.py
+    !python3 init_settings.py
+    !python3 login_fshare.py
     ```
 
 ## Usage
@@ -59,12 +52,15 @@ All done, before use upload, you must login to Fshare API by run this command:
 ```bash
 python3 login_fshare.py
 ```
-If output is `Done!`, you are logged in successfully.
-
+## colab
+```bash
+!python3 login_fshare.py
+```
 To upload file from Fshare link to Drive, use:
 ```bash
 python3 f_dl.py <url of Fshare file> [Password of link (opitional)]
 ```
-
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change
+## colab
+```bash
+!python3 f_dl.py <url of Fshare file> [Password of link (opitional)]
+```
