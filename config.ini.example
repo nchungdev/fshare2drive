@@ -1,0 +1,18 @@
+[Auth]
+mail =
+password =
+user_agent =
+app_key =
+
+[API]
+get_folder_list = https://api.fshare.vn/api/fileops/getFolderList
+user_api_url = https://api.fshare.vn/api/user
+file_dl_api_url = https://api.fshare.vn/api/session/download
+
+[Login]
+session_id =
+token =
+
+[Drive]
+fshare_folder = /content/drive/MyDrive/fshare/
+download_folder =
