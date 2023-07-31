@@ -28,7 +28,7 @@ Fshare2Drive is a tool to transfer Fshare file to Google Drive, OneDrive using F
 
     ```bash
     git clone https://github.com/nchungdev/fshare2drive
-    cd fshare_tool
+    cd fshare2drive
     cp config.ini.example config.ini
     pip3 install -r requirements.txt
     python3 init_settings.py
@@ -37,9 +37,9 @@ Fshare2Drive is a tool to transfer Fshare file to Google Drive, OneDrive using F
 - Or short cmd for colab
     ```bash
     !git clone https://github.com/nchungdev/fshare2drive
-    !cd fshare_tool
-    !mv -v fshare_tool/* .
-    !rm -r fshare_tool
+    !cd fshare2drive
+    !mv -v fshare2drive/* .
+    !rm -r fshare2drive
     !mv config.ini.example config.ini
     !pip3 install -r requirements.txt
     !python3 init_settings.py
