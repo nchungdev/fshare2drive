@@ -27,8 +27,6 @@ git clone https://github.com/nchungdev/fshare2drive
 cd fshare_tool
 cp config.ini.example config.ini
 pip3 install -r requirements.txt
-python3 init_settings.py
-python3 login_fshare.py
 ```
 ### Colab
 ```bash
@@ -38,8 +36,6 @@ python3 login_fshare.py
 !rm -r fshare_tool
 !mv config.ini.example config.ini
 !pip3 install -r requirements.txt
-!python3 init_settings.py
-!python3 login_fshare.py
 ```
 ## To upload file from Fshare link to Drive, use:
 ### Bash

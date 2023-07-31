@@ -13,4 +13,4 @@ session_id =
 token = 
 
 [Drive]
-folder_path = /content/drive/MyDrive/
+folder_path =
