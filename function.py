@@ -58,7 +58,7 @@ def chunk_download(furl, name, folder='downloaded/'):
     r = requests.get(url, stream=True)
     assert r.status_code == 200, r.status_code
     dlen = int(r.headers.get('Content-Length', '0')) or None
-    print("-> File Size: ", "{:.2f}".format(dlen / (2 ** 20) / 1024), "GB (" + str(math.ceil(dlen / 2 ** 20)), "MB)")
+    print('-> File Size: ', '{:.2f}'.format(dlen / (2 ** 20) / 1024), 'GB (' + str(math.ceil(dlen / 2 ** 20)), "MB)")
     with MANAGER.counter(color='green', total=dlen and math.ceil(dlen / 2 ** 20), unit='MiB', leave=False) as ctr, \
             open(folder + file_name, 'wb', buffering=2 ** 24) as f:
         for chunk in r.iter_content(chunk_size=2 ** 20):
@@ -70,5 +70,5 @@ def chunk_download(furl, name, folder='downloaded/'):
 
 def push_to_drive(file='', path=''):
     import os
-    os.popen("mv -v " + " '" + file + "' " + path)
-    print('-> Uploaded to Google Drive ' + file)
+    os.popen('mv -v ' + " '" + file + "' " + path)
+    print('-> Uploaded ' + file + ', ' + ' to ' + path)
