@@ -1,4 +1,7 @@
-import requests, configparser, sys
+import configparser
+import sys
+
+import requests
 
 
 # sys func
@@ -6,13 +9,13 @@ def exit(err):
     sys.exit(err)
 
 
-def myParser(path='config.ini'):
+def config_parser(path='config.ini'):
     ps = configparser.ConfigParser()
     ps.read(path)
     return ps
 
 
-def toDict(self, get='All'):
+def to_dict(self, get='All'):
     d = dict(self._sections)
     for k in d:
         d[k] = dict(self._defaults, **d[k])
@@ -20,7 +23,7 @@ def toDict(self, get='All'):
     return d if get == 'All' else d[get]
 
 
-def errorInfo(error_code):
+def error_info(error_code):
     ec = str(error_code)
     i = {
         '405': '-> Wrong Password, please edit correct information config',
@@ -33,11 +36,15 @@ def errorInfo(error_code):
     return i[ec] if ec in i else "Unknown Error"
 
 
-def rq_fshare(type='POST', URL='', header={}, Data={}):
-    return requests.post(url=URL, headers=header, json=Data)
+def rq_fshare(type='POST', url='', header=None, data=None):
+    if data is None:
+        data = {}
+    if header is None:
+        header = {}
+    return requests.post(url=url, headers=header, json=data)
 
 
-def requestToJson(self):
+def request_to_json(self):
     import json
     return json.loads(json.dumps(self.json()))
 
@@ -45,7 +52,7 @@ def requestToJson(self):
 def chunk_download(furl, name, folder='downloaded/'):
     import math, enlighten
     url = furl
-    fname = name
+    file_name = name
     # Should be one global variable
     MANAGER = enlighten.get_manager()
     r = requests.get(url, stream=True)
@@ -53,32 +60,15 @@ def chunk_download(furl, name, folder='downloaded/'):
     dlen = int(r.headers.get('Content-Length', '0')) or None
     print("-> File Size: ", "{:.2f}".format(dlen / (2 ** 20) / 1024), "GB (" + str(math.ceil(dlen / 2 ** 20)), "MB)")
     with MANAGER.counter(color='green', total=dlen and math.ceil(dlen / 2 ** 20), unit='MiB', leave=False) as ctr, \
-            open(folder + fname, 'wb', buffering=2 ** 24) as f:
+            open(folder + file_name, 'wb', buffering=2 ** 24) as f:
         for chunk in r.iter_content(chunk_size=2 ** 20):
             # print(chunk[-16:].hex().upper())
             f.write(chunk)
             ctr.update()
-    return fname
+    return file_name
 
 
-def pushToOneDrive(file='', remotename='', path=''):
-    import os
-    cmd = "rclone copy '" + file + "' " + remotename + ":" + path + "--drive-acknowledge-abuse " \
-                                                                    "--drive-keep-revision-forever " \
-                                                                    "--drive-use-trash=false"
-    print(cmd)
-    with os.popen(cmd) as f:
-        print(f.readlines())
-
-
-def pushToGDrive(file='', path=''):
+def push_to_drive(file='', path=''):
     import os
     os.popen("mv -v " + " '" + file + "' " + path)
     print('-> Uploaded to Google Drive ' + file)
-
-
-def removeFile(file=''):
-    import os
-    print("-> Deleting local File...")
-    print("rm -rf " + "'" + file + "'")
-    os.popen("rm -rf " + "'" + file + "'")
