@@ -13,9 +13,4 @@ session_id =
 token = 
 
 [Drive]
-gdrive = 0
-onedrive = 0
-drive_folder_path = /content/drive/MyDrive/
-onedrive_folder_path = /Fshare/24_11
-rclone_remote_name = odd
-path_to_gdrive = /usr/bin/gdrive
+folder_path = /content/drive/MyDrive/
