@@ -44,9 +44,9 @@ python3 login_fshare.py
 ## To upload file from Fshare link to Drive, use:
 ### Bash
 ```bash
-python3 f_dl.py <url of Fshare file> [Password of link (opitional)]
+python3 download.py
 ```
 ### Colab
 ```bash
-!python3 f_dl.py <url of Fshare file> [Password of link (opitional)]
+!python3 download.py
 ```
