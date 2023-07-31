@@ -20,9 +20,6 @@ APP_KEY = cf['Auth']['app_key']
 SESSION_ID = cf['Login']['session_id']
 TOKEN = cf['Login']['token']
 
-if SESSION_ID == '' or TOKEN == '':
-    exit("-> Please login first!")
-
 print("-> Connecting to Fshare...")
 
 header = {"Content-Type": "application/json", "accept": "application/json", "User-Agent": USER_AGENT,

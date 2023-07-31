@@ -13,6 +13,7 @@ GDRIVE_ENABLED = cf['Drive']['gdrive']
 GDRIVE_FOLDER_PATH = cf['Drive']['drive_folder_path']
 
 if GDRIVE_ENABLED == '0' or GDRIVE_FOLDER_PATH == '':
+    print("------------------------")
     print("┌─────────────────────┐")
     print("| CONFIG GOOGLE DRIVE |")
     print("└─────────────────────┘")
