@@ -28,9 +28,12 @@ elif len(sys.argv) > 1:
                 urls.append(sys.argv[index])
 
 fshare_folder = '/content/drive/MyDrive/fshare/'
-if check_file_exist(fshare_folder):
-    copy_to_drive(fshare_folder + 'config.ini', '')
-else:
+if not check_file_exist('config.ini'):
+    if check_file_exist(fshare_folder):
+        copy_to_drive(fshare_folder + 'config.ini', '')
+    else:
+        create_file(fshare_folder)
+elif not check_file_exist(fshare_folder):
     create_file(fshare_folder)
 
 CONFIG = Config(config_parser())
