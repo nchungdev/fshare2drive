@@ -30,7 +30,7 @@ elif len(sys.argv) > 1:
 fshare_folder = '/content/drive/MyDrive/fshare/'
 if not check_file_exist('config.ini'):
     if check_file_exist(fshare_folder):
-        copy_to_drive(fshare_folder + 'config.ini', '')
+        copy_to_drive(fshare_folder + 'config.ini', '.')
     else:
         create_file(fshare_folder)
 elif not check_file_exist(fshare_folder):
