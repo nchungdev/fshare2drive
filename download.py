@@ -27,15 +27,7 @@ elif len(sys.argv) > 1:
             if index > 0:
                 urls.append(sys.argv[index])
 
-CONFIG = {}
-if not check_file_exist('config.ini'):
-    os.open('mv config.ini.example config.ini')
-    CONFIG = Config(config_parser())
-    if check_file_exist(CONFIG.fshare_folder):
-        CONFIG.copy_of(Config(config_parser(CONFIG.fshare_folder + 'config.ini')))
-        commit_config(CONFIG.parser)
-else:
-    CONFIG = Config(config_parser())
+CONFIG = Config(config_parser())
 
 urls = process_urls(get_downloaded_info(CONFIG), urls)
 # download urls and upload to drive
