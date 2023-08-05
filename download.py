@@ -27,16 +27,16 @@ elif len(sys.argv) > 1:
             if index > 0:
                 urls.append(sys.argv[index])
 
-fshare_folder = '/content/drive/MyDrive/fshare/'
+CONFIG = {}
 if not check_file_exist('config.ini'):
+    os.open('mv config.ini.example config.ini')
+    CONFIG = Config(config_parser())
+    fshare_folder = '/content/drive/MyDrive/fshare/'
     if check_file_exist(fshare_folder):
-        copy_to_drive(fshare_folder + 'config.ini', '.')
-    else:
-        create_file(fshare_folder)
-elif not check_file_exist(fshare_folder):
-    create_file(fshare_folder)
-
-CONFIG = Config(config_parser())
+        CONFIG.copy_of(Config(config_parser(fshare_folder + 'config.ini')))
+        commit_config(CONFIG.parser)
+else:
+    CONFIG = Config(config_parser())
 
 urls = process_urls(get_downloaded_info(CONFIG), urls)
 # download urls and upload to drive

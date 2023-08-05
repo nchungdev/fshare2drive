@@ -103,7 +103,18 @@ class Config:
         self.password = cf['Auth']['password']
         self.ssid = cf['Login']['session_id']
         self.token = cf['Login']['token']
-        self.get_download_folder()
+
+    def copy_of(self, config):
+        self.parser = config.parser
+        self.get_folder_list = config.get_folder_list
+        self.user_api_url =  config.user_api_url
+        self.file_dl_api_url = config.file_dl_api_url
+        self.fshare_folder = config.fshare_folder
+        self.download_folder = config.download_folder
+        self.app_key = config.app_key
+        self.user_agent = config.user_agent
+        self.mail = config.mail
+        self.password =config.password
 
     def is_valid(self):
         return self.mail != '' and self.password != '' and self.user_agent != '' and self.app_key != ''
