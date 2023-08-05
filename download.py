@@ -31,9 +31,8 @@ CONFIG = {}
 if not check_file_exist('config.ini'):
     os.open('mv config.ini.example config.ini')
     CONFIG = Config(config_parser())
-    fshare_folder = '/content/drive/MyDrive/fshare/'
-    if check_file_exist(fshare_folder):
-        CONFIG.copy_of(Config(config_parser(fshare_folder + 'config.ini')))
+    if check_file_exist(CONFIG.fshare_folder):
+        CONFIG.copy_of(Config(config_parser(CONFIG.fshare_folder + 'config.ini')))
         commit_config(CONFIG.parser)
 else:
     CONFIG = Config(config_parser())
