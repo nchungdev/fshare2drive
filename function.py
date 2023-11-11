@@ -229,7 +229,7 @@ def get_url_from_file(file=''):
             for line in file:
                 line = line.strip()
                 if re.match(r'^https?://\S+', line):
-                    urls.append(line)
+                    urls.append(normalize_url(line))
     except FileNotFoundError:
         return []
     return urls
@@ -246,6 +246,16 @@ def make_downloaded(downloaded_info, file_name, url):
         fp.write("# %s\n" % file_name)
         fp.write("%s\n" % url)
 
+def normalize_url(url):
+    if url.find("?") > 0:
+        return url.split("?")[0]
+    return url
+
+def normalize_urls(urls):
+    rs = []
+    for url in urls:
+        rs.append(normalize_url(url))
+    return rs
 
 def process_urls(downloaded_info, urls):
     if not check_file_exist(downloaded_info):
@@ -281,7 +291,7 @@ def get_urls_from_folder(config, folder_url):
     json = request_to_json(r)
     urls = []
     for obj in json:
-        urls.append(obj['furl'])
+        urls.append(normalize_url(obj['furl']))
     return process_urls(get_downloaded_info(config), urls)
 
 
@@ -304,11 +314,10 @@ def get_direct_download_url(config: Config, url='', password=''):
         return ''
 
     json = request_to_json(r)
-    return json['location']
-
+    return normalize_url(json['location'])
 
 def download(config, urls):
-    for index, url in enumerate(urls):
+    for index, url in enumerate(normalize_urls(urls)):
         print('-> Input Url: ', url)
         if is_folder_fshare(url):
             print("-> It's a Fshare folder link, let's get the list URL....")
